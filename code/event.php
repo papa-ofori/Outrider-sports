@@ -30,7 +30,7 @@
     <div class="navbarr">
         <label class="brandd">Outrider Sports</label>
         <ul>
-            <li><a href="index.html">Home</a></li>
+            <li><a href="index.html" onClick="alert('You maybe logged out')">Home</a></li>
             <li><a href="#">Events</a></li>
             <li><a href="schedule.php">Schedule</a></li>
          

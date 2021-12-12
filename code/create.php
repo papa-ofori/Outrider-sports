@@ -19,6 +19,7 @@ if (isset($_POST['signup'])) {
     $school = validate($_POST['school']);
     $sports = validate($_POST['sports']);
     $userpassword = validate($_POST['user_password']);
+    $trainerId = random_int(1, 7);
 
     //print_r($_POST);
 }
@@ -38,7 +39,7 @@ if (mysqli_num_rows($check_email) > 0) {
     window.location.href='index.html';
     </script>";
 } else {
-    $sql = "INSERT INTO registered_students_athletes(username, emailAdress, dateofBirth,  gender, school, sports, user_password) Values('$username','$email','$dateofBirth','$gender','$school','$sports','$userpassword')";
+    $sql = "INSERT INTO registered_students_athletes(username, emailAdress, dateofBirth,  gender, school, sports, user_password, trainerID) Values('$username','$email','$dateofBirth','$gender','$school','$sports','$userpassword', '$trainerId')";
 
     echo $sql;
     if ($conn->query($sql) === true) {

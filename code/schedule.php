@@ -1,3 +1,16 @@
+<?php
+session_start();
+include 'dbconn.php';
+
+if (isset($_SESSION['login-email'])) {
+    $email = htmlspecialchars($_SESSION['login-email']);
+}
+
+$studentDetails = retrieveTrainingDetails($email);
+
+// print_r($studentDetails);
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -21,7 +34,7 @@
     <div class="navbarr">
         <label class="brandd">Outrider Sports</label>
         <ul>
-            <li><a href="index.html">Home</a></li>
+            <li><a href="index.html" onClick="alert('You maybe logged out')">Home</a></li>
             <li><a href="event.php">Events</a></li>
             <li><a href="">Schedule</a></li>
             
@@ -45,23 +58,30 @@
                             </div>
 
 
-                            
-                            <!-- card section right side  -->
+                            <?php foreach ($studentDetails as $key => $value) {
+                                echo '
+    <!-- card section right side  -->
                             <div class="col-sm-8">
                                 <div class="card-block">
                       
-
+                            
 
                                     <!-- tittle user name and sports done by user -->
-                                    <h6 class="m-b-20 p-b-5 b-b-default f-w-600">Student Athlete ID : 1 </h6>
+                                    <h6 class="m-b-20 p-b-5 b-b-default f-w-600">Student Athlete Name : ' .
+                                    $value['username'] .
+                                    '</h6>
                                     <div class="row">
                                         <div class="col-sm-6">
                                             <p class="m-b-10 f-w-600">School</p>
-                                            <h6 class="text-muted f-w-400">Ashesi</h6>
+                                            <h6 class="text-muted f-w-400">' .
+                                    $value['school'] .
+                                    '</h6>
                                         </div>
                                         <div class="col-sm-6">
                                             <p class="m-b-10 f-w-600">Sports</p>
-                                            <h6 class="text-muted f-w-400">Tennis</h6>
+                                            <h6 class="text-muted f-w-400"> ' .
+                                    $value['sports'] .
+                                    '</h6>
                                         </div>
 
                                         <!-- Training Day and Time -->
@@ -70,11 +90,15 @@
                                     <div class="row">
                                         <div class="col-sm-6">
                                             <p class="m-b-10 f-w-600">Training Day</p>
-                                            <h6 class="text-muted f-w-400">Monday</h6>
+                                            <h6 class="text-muted f-w-400">' .
+                                    $value['trainingDay'] .
+                                    '</h6>
                                         </div>
                                         <div class="col-sm-6">
                                             <p class="m-b-10 f-w-600">Training Time</p>
-                                            <h6 class="text-muted f-w-400">16:30</h6>
+                                            <h6 class="text-muted f-w-400"> ' .
+                                    $value['trainingTime'] .
+                                    '</h6>
                                         </div>
                                     </div>
 
@@ -84,11 +108,15 @@
                                     <div class="row">
                                         <div class="col-sm-6">
                                             <p class="m-b-10 f-w-600">Venue</p>
-                                            <h6 class="text-muted f-w-400">Elwalk Sports Stadium</h6>
+                                            <h6 class="text-muted f-w-400">' .
+                                    $value['trainingVenue'] .
+                                    '</h6>
                                         </div>
                                         <div class="col-sm-6">
                                             <p class="m-b-10 f-w-600">Team name</p>
-                                            <h6 class="text-muted f-w-400">Elite</h6>
+                                            <h6 class="text-muted f-w-400">' .
+                                    $value['teamName'] .
+                                    '</h6>
                                         </div>
                                     </div>
 
@@ -97,17 +125,25 @@
                                     <h6 class="m-b-20 m-t-40 p-b-5 b-b-default f-w-600">Trainer</h6>
                                     <div class="row">
                                         <div class="col-sm-6">
-                                            <p class="m-b-10 f-w-600">Name</p>
-                                            <h6 class="text-muted f-w-400">Sam Disuja</h6>
+                                            <p class="m-b-10 f-w-600">Trainer Name</p>
+                                            <h6 class="text-muted f-w-400">' .
+                                    $value['trainerName'] .
+                                    '</h6>
                                         </div>
                                         <div class="col-sm-6">
-                                            <p class="m-b-10 f-w-600">Email</p>
-                                            <h6 class="text-muted f-w-400">Dinoter husainm</h6>
+                                            <p class="m-b-10 f-w-600">Trainer Email</p>
+                                            <h6 class="text-muted f-w-400">' .
+                                    $value['trainerEmail'] .
+                                    '</h6>
                                         </div>
                                     </div>
 
                                 </div>
                             </div>
+    
+    ';
+                            } ?>                
+                            
                         </div>
                     </div>
                 </div>
@@ -122,11 +158,11 @@
         <h3>Outrider Sports</h3>
         <p>We are open everyday of the week from 12:00 pm to 5:00 pm. Visit our socials media handles for more enquiries. Emergency contancts: +233 55 174 7839 or +233 20 823 3139. "OUTRIDERS: WE GO INSIDE!!" </p>
         <ul class="socials">
-            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-            <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-            <li><a href="#"><i class="fa fa-youtube"></i></a></li>
-            <li><a href="#"><i class="fa fa-linkedin-square"></i></a></li>
+            <li><a href="https://www.facebook.com/jrnba/"><i class="fa fa-facebook"></i></a></li>
+            <li><a href="https://twitter.com/right2dream"><i class="fa fa-twitter"></i></a></li>
+            <li><a href="https://srfymca.org/jr-nba-co-ed-girls-only-leagues/"><i class="fa fa-google-plus"></i></a></li>
+            <li><a href="https://www.youtube.com/channel/UCuA7P9O4_YEJHa6epPnWAbg"><i class="fa fa-youtube"></i></a></li>
+            <li><a href="https://www.linkedin.com/company/european-platform-for-sport-innovation/"><i class="fa fa-linkedin-square"></i></a></li>
         </ul>
     </div>
     <div class="footer-bottom">

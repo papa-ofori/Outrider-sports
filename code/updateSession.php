@@ -26,7 +26,7 @@ if (isset($_POST['id']) && !empty($_POST['id'])) {
     if (empty($input_trainingTime)) {
         $trainingTime_err = 'Please enter training time.';
     } else {
-        $emailAdress = $input_emailAdress;
+        $trainingTime = $input_trainingTime;
     }
 
     // Validate training Venue
@@ -139,12 +139,12 @@ if (isset($_POST['id']) && !empty($_POST['id'])) {
                     $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
 
                     // Retrieve individual field value
-                    $username = $row['trainingDay'];
-                    $emailAdress = $row['trainingTime'];
-                    $dateofBirth = $row['trainingVenue'];
-                    $gender = $row['teamName'];
-                    $school = $row['trainerName'];
-                    $sports = $row['trainerEmail'];
+                    $trainingDay = $row['trainingDay'];
+                    $trainingTime = $row['trainingTime'];
+                    $trainingVenue = $row['trainingVenue'];
+                    $teamName = $row['teamName'];
+                    $trainerName = $row['trainerName'];
+                    $trainerEmail = $row['trainerEmail'];
                 } else {
                     // URL doesn't contain valid id. Redirect to error page
                     header('location: error.php');
